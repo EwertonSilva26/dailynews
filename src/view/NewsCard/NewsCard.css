@@ -1,0 +1,33 @@
+.card {
+  height: 12rem;
+  flex-direction: row !important;
+  margin: 20px;
+}
+
+.card img {
+  width: 14rem;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.card-body button {
+  margin-top: auto !important;
+}
+
+.card-title {
+  margin-bottom: 0.5rem !important;
+}
+
+.card-text {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}

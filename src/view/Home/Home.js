@@ -1,0 +1,20 @@
+import { Form, Button, Nav, Navbar } from 'react-bootstrap';
+
+function Home() {
+  return (
+    <>
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="#home">InfoNews</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Nav.Link href="#home">Início</Nav.Link>
+          <Nav.Link href="#features">Assine</Nav.Link>
+        </Nav>
+        <Form inline>
+          <Button variant="outline-info">Entrar</Button>
+        </Form>
+      </Navbar>
+    </>
+  );
+}
+
+export default Home;
