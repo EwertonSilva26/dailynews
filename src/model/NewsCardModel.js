@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import NewsCard from '../view/NewsCard/NewsCard'
+import NewsCardController from '../controllers/NewsCardController'
 
-export default class CarModel extends Component {
+export default class NewsCardModel extends Component {
 
     render() {
 
@@ -15,7 +15,7 @@ sheets containing Lorem Ipsum passages, and more recently with desktop publishin
 software like Aldus PageMaker including versions of Lorem Ipsum.`;
 
         const image1 = `https://s2.glbimg.com/QqEDyJyWVPTI9tU-5izKpJls6UE=/620x520/smart/
-        e.glbimg.com/og/ed/f/original/2020/11/30/baby-yoda.jpg`;
+e.glbimg.com/og/ed/f/original/2020/11/30/baby-yoda.jpg`;
 
         const image2 = `https://static.wikia.nocookie.net/godofwar/images/d/dc/Kratos.jpg/revision/latest?cb=20170725220420&path-prefix=pt-br`;
 
@@ -24,9 +24,12 @@ software like Aldus PageMaker including versions of Lorem Ipsum.`;
 
         return (
             <div>
-                <NewsCard image={image1} title="Notícia 1" text={text}></NewsCard>
-                <NewsCard image={image2} title="Notícia 1" text={text}></NewsCard>
-                <NewsCard image={image3} title="Notícia 3" text={text}></NewsCard>
+                <NewsCardController
+                    image1={image1}
+                    image2={image2}
+                    image3={image3}
+                    text={text}>
+                </NewsCardController>
             </div>
         )
     }

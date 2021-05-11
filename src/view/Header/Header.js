@@ -1,5 +1,7 @@
 import { Form, Button, Nav, Navbar } from 'react-bootstrap';
 
+import './Header.css';
+
 function Header() {
   return (
     <>
