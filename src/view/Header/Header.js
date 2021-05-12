@@ -1,6 +1,7 @@
 import { Form, Button, Nav, Navbar } from 'react-bootstrap';
+import './Header.css'
 
-function Home() {
+function Header() {
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -17,4 +18,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Header;

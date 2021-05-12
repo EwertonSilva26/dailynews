@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 //import Login from './Login/Login';
-import Home from './Home/Home';
+import Header from './Header/Header';
 import NewsCard from './NewsCard/NewsCard';
 
 const text = `Lorem Ipsum is simply dummy text of the printing and 
@@ -26,7 +26,7 @@ const image3 = `https://miro.medium.com/max/485/1*NPFbsnC4K9b5xPbEz6LoJw.jpeg`;
 function App() {
   return (
     <div className="App">
-      <Home></Home>
+      <Header></Header>
       <NewsCard image={image1} title="Notícia 1" text={text}></NewsCard>
       <NewsCard image={image2} title="Notícia 2" text={text}></NewsCard>
       <NewsCard image={image3} title="Notícia 3" text={text}></NewsCard>
