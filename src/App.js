@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+
 import NewsCard from './components/NewsCard/NewsCard';
+import NewDetails from './components/NewDetails/NewDetails'
+import Login from './components/Login/Login';
 import Header from './components/Header/Header';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-//import Login from './Login/Login';
 
 const text = `Lorem Ipsum is simply dummy text of the printing and 
 typesetting industry. Lorem Ipsum has been the industry's standard 
@@ -43,10 +46,30 @@ function App() {
   )
 
   return (
+    <BrowserRouter>
+
     <div className="App">
-      <Header></Header>
-      <NewsCard news={news}></NewsCard>
+      <Header />
+
+      <Switch>
+        <Redirect from='/' to='/news' exact />
+        <Route path="/news" exact>
+        <NewsCard news={news}></NewsCard>
+        </Route>
+
+        <Route path="/news/:id" exact>
+          <NewDetails />
+        </Route>
+
+        <Route path="/login" exact>
+          <Login />
+        </Route>
+
+        <Route render={() => <div> Pagina não encontrada </div>} />
+        </Switch>
     </div>
+
+    </BrowserRouter>
   );
 }
 
