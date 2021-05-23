@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import NewsCard from './components/NewsCard/NewsCard';
@@ -11,88 +12,45 @@ import React from 'react';
 
 import './App.css';
 
+function App() {
 
-const text = `Lorem Ipsum is simply dummy text of the printing and 
-typesetting industry. Lorem Ipsum has been the industry's standard 
-dummy text ever since the 1500s, when an unknown printer took a galley 
-of type and scrambled it to make a type specimen book. It has survived not 
-only five centuries, but also the leap into electronic typesetting, remaining 
-essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-sheets containing Lorem Ipsum passages, and more recently with desktop publishing 
-software like Aldus PageMaker including versions of Lorem Ipsum.`;
+  const [news, setNews] = useState([]);
 
-const news = [
-  {
-    id: 1,
-    image: `https://s2.glbimg.com/QqEDyJyWVPTI9tU-5izKpJls6UE=/620x520/smart/
-    e.glbimg.com/og/ed/f/original/2020/11/30/baby-yoda.jpg`,
-    title: "Titulo 1",
-    text: text
-  },
-  {
-    id: 2,
-    image: `https://pm1.narvii.com/6340/818cf5d1a6a2f6693413168c50ab0b64177f49c2_hq.jpg`,
-    title: "Titulo 2",
-    text: text
-  },
-  {
-    id: 3,
-    image: `https://miro.medium.com/max/485/1*NPFbsnC4K9b5xPbEz6LoJw.jpeg`,
-    title: "Titulo 3",
-    text: text
-  }
-]
+  useEffect(() => {
+    axios.get('http://localhost:3003/news')
+      .then((response) => {
+        setNews(response.data);
+      }).catch((err) => {
+        console.log(`Erro: ${err}`);
+      })
+  });
 
-export default class App extends React.Component {
-  constructor() {
-    super();
+  return (
+    <BrowserRouter>
 
-    this.state = {
-      classHide: 'show'
-    }
-  }
+      <div className="App">
+        <Header />
 
-  changeState() {
-    var st = '';
-    if (this.state.classHide === 'show') {
-      st = 'hide';
-    } else {
-      st = 'show'
-    }
+        <Switch>
+          <Redirect from='/' to='/news' exact />
+          <Route path="/news" exact>
+            <NewsCard news={news}></NewsCard>
+          </Route>
 
-    this.setState({
-      classHide: st
-    })
-  }
+          <Route path="/news/:id" exact>
+            <NewDetails />
+          </Route>
 
-  render() {
-    return (
-      <BrowserRouter>
+          <Route path="/login" exact>
+            <Login />
+          </Route>
 
-        <div className="App">
-          <Header hideHeader={this.state.classHide} changeState={this.changeState.bind(this)} />
+          <Route render={() => <div> Pagina não encontrada </div>} />
+        </Switch>
+      </div>
 
-          <Switch>
-            <Redirect from='/' to='/news' exact />
-            <Route path="/news" exact>
-              <NewsCard news={news}></NewsCard>
-            </Route>
-
-            <Route path="/news/:id" exact>
-              <NewDetails />
-            </Route>
-
-            <Route path="/login" exact>
-              <Login />
-            </Route>
-
-            <Route render={() => <div> Pagina não encontrada </div>} />
-          </Switch>
-        </div>
-
-      </BrowserRouter>
-    );
-  }
+    </BrowserRouter>
+  );
 }
 
-// export default App;
+export default App;

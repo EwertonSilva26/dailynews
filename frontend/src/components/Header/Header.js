@@ -6,27 +6,11 @@ import './Header.css'
 
 // var teste = "";
 
-export default class Header extends React.Component {
+function Header() {
 
-  constructor() {
-    super()
-    
-    this.nova = this.state = {
-      classHide: 'show'
-    }
-
-  }
-
-  render() {
-
-    // if() {
-      
-    // }
-    // === 'show' ? this.state.classHide : this.props.hideHeader 
-    // console.log("THIS: " + this.state.classHide);
 
     return (
-      <div className={this.props.hideHeader}>
+      <div>
 
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="/news">DailyNews</Navbar.Brand>
@@ -37,7 +21,7 @@ export default class Header extends React.Component {
           </Nav>
           <Form inline>
             <NavLink to="/login" exact>
-              <Button variant="outline-info" onClick={this.props.changeState}>
+              <Button variant="outline-info">
                 Entrar
               </Button>
             </NavLink>
@@ -45,7 +29,6 @@ export default class Header extends React.Component {
         </Navbar>
       </div>
     );
-  }
 }
 
-// export default Header;
+export default Header;

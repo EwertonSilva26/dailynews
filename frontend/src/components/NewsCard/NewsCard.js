@@ -8,12 +8,12 @@ const NewsCard = ({ news }) => {
     <div>
       {news.map((item) => {
         return (
-          <Card className="news-card">
+          <Card key={news.idNew} className="news-card">
             <Card.Img variant="top" src={item.image} />
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
-              <Card.Text>{item.text}</Card.Text>
-              <Link to={'/news/'+item.id}><Button variant="primary">Ir para notícia</Button></Link>
+              <Card.Text>{item.textNew}</Card.Text>
+              <Link to={'/news/'+item.idNew}><Button variant="primary">Ir para notícia</Button></Link>
             </Card.Body>
           </Card>
         );
