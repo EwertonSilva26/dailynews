@@ -1,4 +1,4 @@
 # dailyNews-backend
 
-# Para iniciar backend - nodemon app.js
-# porta 303
+# Para iniciar backend - run nodemon app.js
+# porta 3003
