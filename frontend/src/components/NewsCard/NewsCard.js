@@ -1,5 +1,3 @@
-import './NewsCard.css';
-
 import New from '../New/New';
 
 const NewsCard = ({ news }) => {
@@ -7,7 +5,7 @@ const NewsCard = ({ news }) => {
     <div>
       {news.map((item) => {
         return (
-          <New props={item}></New>
+          <New key={item.idNew} props={item}></New>
         );
       })}
 

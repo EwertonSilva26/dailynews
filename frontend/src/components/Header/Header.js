@@ -16,15 +16,15 @@ function Header() {
           <Navbar.Brand href="/news">DailyNews</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/news">Início</Nav.Link>
-            <Nav.Link href="#features">Assine</Nav.Link>
+            {/* <Nav.Link href="#features">Assine</Nav.Link> */}
 
           </Nav>
           <Form inline>
-            <NavLink to="/login" exact>
+            {/* <NavLink to="/login" exact>
               <Button variant="outline-info">
                 Entrar
               </Button>
-            </NavLink>
+            </NavLink> */}
           </Form>
         </Navbar>
       </div>

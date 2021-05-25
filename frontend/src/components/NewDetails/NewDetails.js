@@ -1,35 +1,36 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 
-// import { useState, useEffect } from 'react';
-// import New from '../New/New';
+import { useState, useEffect } from 'react';
+import { Card } from 'react-bootstrap';
 
-const NewDetails = () => {
-
-    //Tentei fazer a buscar por id, mas sabosta não funciona
-
-    // const [noticia, setNoticia] = useState([]);
-    //Retorna o id
- 
-   const { id } = useParams();
+import React from 'react';
 
 
-    // useEffect(() => {
-    //   axios.get('http://localhost:3003/news/'+id)
-    //     .then((response) => {
-    //         console.log("Response: " + response.data.title);
-    //         setNoticia(response.data.title);
-    //     }).catch((err) => {
-    //       console.log(`Erro: ${err}`);
-    //     })
-    // });
+function NewDetails() {
 
-    
+    const [info, setInfo] = useState({});
+
+    const { id } = useParams();
+
+    useEffect(() => {
+        axios.get('http://localhost:3003/news/' + id)
+            .then((response) => {
+                setInfo(response.data[0]);
+            }).catch((err) => {
+                console.log(`Erro: ${"Entrou no erro: " + err.message}`);
+            })
+    });
+
     return (
         <div>
-            <p>Noticia numero - {id}</p>
-            {/* <New props={noticia}></New> */}
+            <h2>{info.title}</h2>
+            <Card className="news-card">
+                <Card.Img variant="top" src={info.image} />
+                <Card.Body>
+                    <Card.Text>{info.textNew}</Card.Text>
+                </Card.Body>
+            </Card>
         </div>
     )
 }
