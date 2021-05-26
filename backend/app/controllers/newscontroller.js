@@ -38,8 +38,8 @@ module.exports = {
                 res.send(msg)
             } else {
                 const info = {
-                    id: req.params.id,
-                    text: req.body.text, 
+                    idNew: result.insertId,
+                    textNew: req.body.text, 
                     title: req.body.title, 
                     subtitle: req.body.subtitle, 
                     image_small: req.body.imgSmall, 
@@ -55,15 +55,15 @@ module.exports = {
             if (error) {
                 res.send(msg)
             } else {
-                const updateNew = {
-                    id: req.params.id,
-                    text: req.body.text, 
+                const updatedNew = {
+                    idNew: req.params.id,
+                    textNew: req.body.text, 
                     title: req.body.title, 
                     subtitle: req.body.subtitle, 
                     image_small: req.body.imgSmall, 
                     image_bigger: req.body.imgBigger
                 }
-                res.send(updateNew);
+                res.send(updatedNew);
             }
         });
     },
