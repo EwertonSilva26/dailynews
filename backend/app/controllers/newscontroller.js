@@ -14,7 +14,7 @@ module.exports = {
     getAllNewsController: function (app, req, res) {
         getNewsModel(connection, function (error, result) {
             if (error) {
-                res.send("")
+                res.send(msg)
             } else {
                 res.send(result);
             }
@@ -37,7 +37,15 @@ module.exports = {
             if (error) {
                 res.send(msg)
             } else {
-                res.send(req.body);
+                const info = {
+                    id: req.params.id,
+                    text: req.body.text, 
+                    title: req.body.title, 
+                    subtitle: req.body.subtitle, 
+                    image_small: req.body.imgSmall, 
+                    image_bigger: req.body.imgBigger
+                }
+                res.send(info);
             }
         });
     },
@@ -47,7 +55,15 @@ module.exports = {
             if (error) {
                 res.send(msg)
             } else {
-                res.send(req.body);
+                const updateNew = {
+                    id: req.params.id,
+                    text: req.body.text, 
+                    title: req.body.title, 
+                    subtitle: req.body.subtitle, 
+                    image_small: req.body.imgSmall, 
+                    image_bigger: req.body.imgBigger
+                }
+                res.send(updateNew);
             }
         });
     },
