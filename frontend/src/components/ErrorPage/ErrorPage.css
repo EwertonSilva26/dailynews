@@ -1,0 +1,12 @@
+.principal {
+    margin-top: 100px;
+    display: block;
+    flex-direction: row;
+    text-align: center;
+    font-size: 30px;
+}
+
+.error {
+    font-size: 110px;
+    font-weight: bold;
+}

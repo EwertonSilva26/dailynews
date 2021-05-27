@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 
 import './App.css';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 function App() {
   const [news, setNews] = useState([]);
@@ -49,7 +50,7 @@ function App() {
             <CreateNews />
           </Route>
 
-          <Route render={() => <div> Pagina não encontrada </div>} />
+          <Route render={() => <ErrorPage /> } />
         </Switch>
     </BrowserRouter>
   );
