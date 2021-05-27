@@ -1,7 +1,11 @@
 .show {
-    display: flex;
+  display: flex;
 }
 
 .hide {
-    display: none;
+  display: none;
+}
+
+.body {
+  padding: 40px;
 }

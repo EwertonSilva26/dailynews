@@ -1,0 +1,22 @@
+.content {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content img {
+  margin: 20px 0 30px;
+}
+
+.content p {
+  text-align: justify;
+}
+
+.content span {
+  color: grey;
+}
