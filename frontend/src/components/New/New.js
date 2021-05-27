@@ -2,9 +2,9 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import './News.css';
+import './New.css';
 
-const News = ({ props }) => {
+const New = ({ props }) => {
   return (
     <Card className="news-card">
       <Card.Img variant="top" src={props.image} />
@@ -19,4 +19,4 @@ const News = ({ props }) => {
   );
 };
 
-export default News;
+export default New;

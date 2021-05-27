@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import NewsList from './components/NewsList/NewsList';
-import NewsDetails from './components/NewsDetails/NewsDetails';
+import NewDetails from './components/NewDetails/NewDetails';
 import Login from './components/Login/Login';
 import CreateNews from './components/CreateNews/CreateNews';
 import Header from './components/Header/Header';
@@ -29,7 +29,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
         <Header />
 
         <Switch>
@@ -39,7 +38,7 @@ function App() {
           </Route>
 
           <Route path="/news/:id" exact>
-            <NewsDetails />
+            <NewDetails />
           </Route>
 
           <Route path="/login" exact>
@@ -52,7 +51,6 @@ function App() {
 
           <Route render={() => <div> Pagina não encontrada </div>} />
         </Switch>
-      </div>
     </BrowserRouter>
   );
 }

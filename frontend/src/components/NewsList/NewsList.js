@@ -1,10 +1,10 @@
-import News from '../News/News';
+import New from '../New/New';
 
 const NewsList = ({ news }) => {
   return (
     <div className="body">
       {news.map((item) => {
-        return <News key={item.idNew} props={item}></News>;
+        return <New key={item.idNew} props={item}></New>;
       })}
     </div>
   );

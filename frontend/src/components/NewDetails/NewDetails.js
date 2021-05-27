@@ -5,9 +5,9 @@ import { useState, useEffect } from 'react';
 
 import React from 'react';
 
-import './NewsDetails.css';
+import './NewDetails.css';
 
-function NewsDetails() {
+function NewDetails() {
   const [info, setInfo] = useState({});
 
   const { id } = useParams();
@@ -36,4 +36,4 @@ function NewsDetails() {
   );
 }
 
-export default NewsDetails;
+export default NewDetails;
