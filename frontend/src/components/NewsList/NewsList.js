@@ -1,9 +1,9 @@
 import New from '../New/New';
 
-const NewsList = ({ news }) => {
+const NewsList = ({ props }) => {
   return (
     <div className="body">
-      {news.map((item) => {
+      {props.map((item) => {
         return <New key={item.idNew} props={item}></New>;
       })}
     </div>

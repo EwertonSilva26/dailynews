@@ -34,7 +34,7 @@ function App() {
         <Switch>
           <Redirect from="/" to="/news" exact />
           <Route path="/news" exact>
-            <NewsList news={news}></NewsList>
+            <NewsList props={news}></NewsList>
           </Route>
 
           <Route path="/news/:id" exact>
