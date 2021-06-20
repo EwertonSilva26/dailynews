@@ -1,7 +1,12 @@
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
+.form-control {
+    width: 200px !important;
+    cursor: pointer !important;
+    background-color: #343a40 !important;
+    border: 1px solid gray !important;
 }
+
+.navbar-dark .navbar-nav .nav-link, .form-control  {
+    color: white !important;
+    font-weight: 300 !important;
+}
+
