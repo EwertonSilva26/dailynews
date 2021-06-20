@@ -1,9 +1,14 @@
 import News from '../News/News';
+import { useContext } from 'react';
+import { NewContext } from '../../context/NewProvider'
 
-const NewsList = ({ props }) => {
+const NewsList = () => {
+  
+  const { news } = useContext(NewContext); 
+
   return (
     <div className="body">
-      {props.map((item) => {
+      {news.map((item) => {
         return <News key={item.idNew} props={item}></News>;
       })}
     </div>

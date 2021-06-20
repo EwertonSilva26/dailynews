@@ -7,7 +7,9 @@ import './News.css';
 const News = ({ props }) => {
   return (
     <Card className="news-card">
-      <Card.Img variant="top" src={props.image} />
+     
+      <Card.Img variant="top" src={props.image} alt=" "/>
+
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>{props.textNew}</Card.Text>
