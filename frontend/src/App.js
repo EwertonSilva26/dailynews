@@ -5,6 +5,8 @@ import React from 'react';
 
 import Header from './components/Header/Header';
 import NewProvider from './context/NewProvider';
+import UfsProvider from './context/UfsProvider';
+import UsersProvider from './context/UsersProvider';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -12,11 +14,15 @@ import Routes from './routes'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <NewProvider>
-        <Routes />
-      </NewProvider>
+    <BrowserRouter> 
+      <UsersProvider>
+        <NewProvider>
+          <UfsProvider>
+          <Header />
+            <Routes />
+          </UfsProvider>
+        </NewProvider>
+      </UsersProvider>  
     </BrowserRouter>
   );
 }

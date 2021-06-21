@@ -1,6 +1,16 @@
 let sql;
 
 module.exports = {
+    getUfsModel: function (connection, callback) {
+        sql = 'select * from uf_table';
+        connection.query(sql, callback);
+    },
+
+    getUsersModel: function (connection, callback) {
+        sql = 'select * from user_table';
+        connection.query(sql, callback);
+    },
+
     getNewsModel: function (connection, callback) {
         sql = 'select * from news_table';
         connection.query(sql, callback);
@@ -13,11 +23,13 @@ module.exports = {
     },
 
     saveNewModel: function (body, connection, callback) {
-        sql = `insert into news_table (textNew, title, subtitle, image, imageBigger) 
+        sql = `insert into news_table (textNew, title, subtitle, uf, image, imageBigger) 
         values (
+            '${body.author}', 
             '${body.text}', 
             '${body.title}', 
-            '${body.subtitle}', 
+            '${body.subtitle}',
+            '${body.uf}',
             '${body.imgSmall}', 
             '${body.imgBigger}'
             )`;
@@ -30,6 +42,7 @@ module.exports = {
         textNew = '${body.text}', 
         title = '${body.title}', 
         subtitle = '${body.subtitle}', 
+        uf = '${body.uf}',
         image = '${body.imgSmall}', 
         imageBigger = '${body.imgBigger}' 
         where idNew = ${id}`;

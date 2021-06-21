@@ -1,4 +1,6 @@
 const {
+    getAllUfsController,
+    getAllUsersController,
     getAllNewsController,
     getNewController,
     saveNewController,
@@ -7,6 +9,18 @@ const {
 } = require('../controllers/newscontroller');
 
 module.exports = {
+
+    ufs: function (app) {
+        app.get('/ufs', (req, res) => {
+            getAllUfsController(app, req, res);
+        })
+    },
+
+    users: function (app) {
+        app.get('/users', (req, res) => {
+            getAllUsersController(app, req, res);
+        })
+    },
 
     news: function (app) {
         app.get('/', (req, res) => {

@@ -1,4 +1,6 @@
 const { 
+    getUfsModel,
+    getUsersModel,
     getNewsModel, 
     getNewModel, 
     saveNewModel, 
@@ -11,6 +13,26 @@ const connection = dbConnection();
 const msg = "Probleama ao conectar o banco";
 
 module.exports = {
+    getAllUfsController: function (app, req, res) {
+        getUfsModel(connection, function (error, result) {
+            if (error) {
+                res.send(msg)
+            } else {
+                res.send(result);
+            }
+        });
+    },
+
+    getAllUsersController: function (app, req, res) {
+        getUsersModel(connection, function (error, result) {
+            if (error) {
+                res.send(msg)
+            } else {
+                res.send(result);
+            }
+        });
+    },
+
     getAllNewsController: function (app, req, res) {
         getNewsModel(connection, function (error, result) {
             if (error) {

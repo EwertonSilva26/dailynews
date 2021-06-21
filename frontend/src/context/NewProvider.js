@@ -7,16 +7,16 @@ export const NewContext = React.createContext();
 const NewProvider = (props) => {
     const [news, setNews] = useState([]);
 
-        useEffect(() => {
-            axios
-                .get('http://localhost:3003/news')
-                .then((response) => {
-                    setNews(response.data);
-                })
-                .catch((err) => {
-                    console.log(`Erro: ${err}`);
-                });
-        });
+    useEffect(() => {
+        axios
+            .get('http://localhost:3003/news')
+            .then((response) => {
+                setNews(response.data);
+            })
+            .catch((err) => {
+                console.log(`Erro: ${err}`);
+            });
+    });
 
         /*const getAllNew = () => {
             return 
