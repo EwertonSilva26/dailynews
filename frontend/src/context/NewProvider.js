@@ -12,7 +12,6 @@ const NewProvider = (props) => {
     }
 
     useEffect(() => {
-
         if (uf === 0) {
             axios.get('http://localhost:3003/news')
                 .then((response) => {
@@ -31,11 +30,6 @@ const NewProvider = (props) => {
                 });
         }
     });
-
-    /*const getAllNew = () => {
-        return 
-    }*/
-
 
     return (
         <NewContext.Provider value={{ news: news, selectUf: selectUf }}/*value={{ livros: livros, insereLivro, deleteLivro, atualizaLivro }} */>

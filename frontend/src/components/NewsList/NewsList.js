@@ -6,14 +6,13 @@ const NewsList = () => {
   
   const { news } = useContext(NewContext); 
 
-  news.map((item) => {
-     return <News key={item.idNew} props={item}></News>;
-  }) 
+  news.map((item) => { return <News key={item.idNew} props={item}></News> }) 
 
   return (
     <div className="body">
       {news.length > 0 ? 
-      (news.map((item) => {return <News key={item.idNew} props={item}></News> ;})) : 
+      (news.map((item) => 
+      {return <News key={item.idNew} props={item}></News>})) : 
       (<h1>Não há noticias para esse estado!</h1>)}
     </div>
   );
