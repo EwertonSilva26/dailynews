@@ -5,7 +5,8 @@ const {
     getNewModel, 
     saveNewModel, 
     updateNewModel, 
-    deleteNewModel 
+    deleteNewModel,
+    getNewsByUfModel
 } = require('../models/newsmodel');
 
 const dbConnection = require('../../config/dbserver');
@@ -25,6 +26,15 @@ module.exports = {
 
     getAllUsersController: function (app, req, res) {
         getUsersModel(connection, function (error, result) {
+            if (error) {
+                res.send(msg)
+            } else {
+                res.send(result);
+            }
+        });
+    },
+    getNewsByUfController: function (app, req, res) {
+        getNewsByUfModel(req.params.id, connection, function (error, result) {
             if (error) {
                 res.send(msg)
             } else {

@@ -6,16 +6,9 @@ export const UfsContext = React.createContext();
 
 const UfsProvider = (props) => {
     const [ufs, setUfs] = useState([]);
-    const [uf, setUf] = useState(0);
-
-    const selectUf = (event) => {
-        ufs.map((uf) => {
-            if(uf.ufName === event) { setUf(uf.idUf); }        
-        })  
-    }
 
     useEffect(() => {
-            axios
+        axios
             .get('http://localhost:3003/ufs')
             .then((response) => {
                 setUfs(response.data);
@@ -26,7 +19,7 @@ const UfsProvider = (props) => {
     });
 
     return (
-        <UfsContext.Provider value={{uf: uf, ufs: ufs, selectUf: selectUf}}>
+        <UfsContext.Provider value={{ ufs: ufs }}>
             {props.children}
         </UfsContext.Provider>
     );

@@ -6,6 +6,14 @@ module.exports = {
         connection.query(sql, callback);
     },
 
+    getNewsByUfModel: function (id, connection, callback) {
+        sql = `select * from news_table AS nt 
+        INNER JOIN uf_table AS uft 
+        ON nt.idUf = uft.idUf
+        WHERE uft.idUf = ${id}` ;
+        connection.query(sql, callback);
+    },
+
     getUsersModel: function (connection, callback) {
         sql = 'select * from user_table';
         connection.query(sql, callback);
@@ -17,7 +25,12 @@ module.exports = {
     },
 
     getNewModel: function (id, connection, callback) {
-        sql = `select * from news_table where idNew = ${id}`;
+        sql = `select * from news_table AS nt 
+        INNER JOIN uf_table AS uft
+        ON nt.idUf = uft.idUf
+        INNER JOIN user_table AS ut
+        ON nt.idUser = ut.idUser
+        where nt.idNew = ${id}`;
 
         connection.query(sql, callback);
     },

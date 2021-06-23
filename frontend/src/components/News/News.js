@@ -16,7 +16,7 @@ const News = ({ props }) => {
       <Card.Img variant="top" src={props.image} alt=" "/>
 
       <Card.Body>
-        <Card.Title>{props.title} | <span>{ufs.map(uf => { if(uf.idUf === props.uf) return uf.ufName })}</span></Card.Title>
+        <Card.Title>{props.title} | <span>{ufs.map(uf => { if(uf.idUf === props.idUf) return uf.ufName })}</span></Card.Title>
         <Card.Text>{props.textNew}</Card.Text>
         <Link to={'/news/' + props.idNew} className="card-link">
           <Button variant="primary">Ir para notícia</Button>

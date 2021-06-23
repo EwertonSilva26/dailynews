@@ -9,3 +9,4 @@ routes.new(app);
 routes.saveNew(app);
 routes.updateNew(app);
 routes.deleteNew(app);
+routes.newsByUf(app);

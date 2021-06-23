@@ -5,7 +5,8 @@ const {
     getNewController,
     saveNewController,
     updateNewController,
-    deleteNewController
+    deleteNewController,
+    getNewsByUfController
 } = require('../controllers/newscontroller');
 
 module.exports = {
@@ -15,7 +16,11 @@ module.exports = {
             getAllUfsController(app, req, res);
         })
     },
-
+    newsByUf: function(app) {
+        app.get('/news/uf/:id', (req, res) => {
+            getNewsByUfController(app, req, res);
+        })
+    },
     users: function (app) {
         app.get('/users', (req, res) => {
             getAllUsersController(app, req, res);

@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import { useContext } from 'react';
 import { UfsContext } from '../../context/UfsProvider'
+import { NewContext } from '../../context/NewProvider'
 
 import './Header.css';
 
@@ -13,7 +14,9 @@ const style = {
 };
 
 function Header() {
-  const { ufs, selectUf } = useContext(UfsContext); 
+  const { ufs } = useContext(UfsContext); 
+  const { selectUf } = useContext(NewContext); 
+
 
   return (
     <div>
@@ -22,10 +25,9 @@ function Header() {
         <Nav className="mr-auto">
           <Nav.Link href="/news">Início</Nav.Link>
           <Form.Control as="select" onChange={(event) => { selectUf(event.target.value)}}>
-          {/* <option disabled selected value>Filtrar por estado</option> */}
-          <option key='0'>Todos os Estados</option>
+          <option value={0} key={0}>Todos os Estados</option>
             {ufs.map((uf) => {
-              return <option key={uf.idUf}>{uf.ufName}</option> 
+              return <option value={uf.idUf} key={uf.idUf}>{uf.ufName}</option> 
             })}
           </Form.Control>
         </Nav>
