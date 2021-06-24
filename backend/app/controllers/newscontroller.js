@@ -41,7 +41,7 @@ module.exports = {
                 "token", {
                 expiresIn: "1h"
             });
-            
+
             res.status(200).send({
                 message: `Autenticado com sucesso`,
                 idUser: result[0].idUser,
@@ -164,20 +164,4 @@ module.exports = {
             }
         });
     }
-}
-
-// Descriptar senha
-const decryptPassword = async (userPassword, password, bcrypt) => {
-
-    const decrypted = await new Promise((resolve, reject) => {
-        bcrypt.compare(userPassword, password, (errBcrypt, result) => {
-            if (errBcrypt) {
-                reject(errBcrypt);
-            } else {
-                resolve(result);
-            }
-        });
-    })
-
-    return decrypted;
 }
