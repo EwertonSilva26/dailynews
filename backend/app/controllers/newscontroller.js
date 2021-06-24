@@ -13,32 +13,47 @@ const {
 
 const dbConnection = require('../../config/dbserver');
 const connection = dbConnection();
-const msg = "Tivemos algum problema para execeutar essa ação! ";
+const msg = "Tivemos algum problema ao conectar o banco de dados!! ";
 
 module.exports = {
 
-    verifyUserController: function (app, bcrypt, jwt, req, res) {
-        getUserByEmailModel(req.body.email, connection, function (error, result) {
-            if (error) {
-                res.send(`${error} ${msg}`)
-            }
-
-            if (decryptPassword(req.body.password, result[0].userPassword, bcrypt)) {
-               const token =  jwt.sign({
-                   idUser: result[0].email,
-                   email: result[0].email
-               }, 
-               "token", {
-                   expiresIn: "1h"
-               })
-                res.send({
-                    message: `Auteticado com sucesso`,
-                    token: token
-                });
-            }
-
+    
+    verifyUserController: async function (app, req, res) {
+        const response = await new Promise((resolve, reject) => {
+            getUserByEmailModel(req.body.email, connection, function (error, result) {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
         });
+        
+        return response;
     },
+
+    responseLoginController: function (decripted, result, jwt, app, req, res) {
+        if (decripted) {
+            const token = jwt.sign({
+                idUser: result[0].idUser,
+                email: result[0].email
+            },
+                "token", {
+                expiresIn: "1h"
+            });
+            
+            res.status(200).send({
+                message: `Autenticado com sucesso`,
+                idUser: result[0].idUser,
+                email: result[0].email,
+                token: token
+            });
+        } else {
+            res.status(401)
+            .send({ mensage: "Falha na autenticação!" });
+        }
+    },
+
     registerUserController: function (app, req, res) {
         registerUserModel(req.body, connection, function (error, result) {
             if (error) {

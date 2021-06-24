@@ -8,7 +8,8 @@ const {
     deleteNewController,
     getNewsByUfController,
     registerUserController,
-    verifyUserController
+    verifyUserController,
+    responseLoginController
 } = require('../controllers/newscontroller');
 
 // Criptgrafando senaha
@@ -17,7 +18,7 @@ const encryptPassword = async (password, bcrypt) => {
         bcrypt.hash(password, 10, (errBcrypt, hash) => {
             if (errBcrypt) {
                 reject(errBcrypt);
-            } else{
+            } else {
                 resolve(hash);
             }
         });
@@ -26,11 +27,31 @@ const encryptPassword = async (password, bcrypt) => {
     return encrypted;
 }
 
+// Descriptar senha
+const decryptPassword = async (userPassword, password, bcrypt) => {
+
+    const decrypted = await new Promise((resolve, reject) => {
+        bcrypt.compare(userPassword, password, (errBcrypt, result) => {
+            if (errBcrypt) {
+                reject(errBcrypt);
+            } else {
+                resolve(result);
+            }
+        });
+    })
+
+    return decrypted;
+}
+
 module.exports = {
 
     loginUser: function (app, bcrypt, jwt) {
-        app.post('/login', (req, res) => {
-            verifyUserController(app, bcrypt, jwt, req, res);
+        app.post('/login', async (req, res) => {
+            const result = await verifyUserController(app, req, res);
+
+            const decripted = await decryptPassword(req.body.password, result[0].userPassword, bcrypt);
+
+            responseLoginController(decripted, result, jwt, app, req, res);
         })
     },
     registerUser: function (app, bcrypt) {

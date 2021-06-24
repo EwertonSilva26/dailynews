@@ -14,4 +14,3 @@ routes.deleteNew(app);
 routes.newsByUf(app);
 routes.registerUser(app, bCrypt);
 routes.loginUser(app, bCrypt, jwt);
-// routes.login(app);
