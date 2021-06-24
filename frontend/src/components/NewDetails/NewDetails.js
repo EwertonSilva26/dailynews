@@ -32,7 +32,9 @@ function NewDetails() {
         <span>{info.ufName}</span>
         <span>Autor: {info.userName}</span>
         <span>Publicado em: {info.created}</span>
-        <img src={info.image}></img>
+        <img src={info.image}
+          alt={`Imagem referente a seguinte noticia ${info.title}`}>
+        </img>
         <p>{info.textNew}</p>
       </div>
     </div>

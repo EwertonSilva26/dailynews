@@ -2,12 +2,20 @@ import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './Login.css';
 
+import { useContext } from 'react';
+import { LoginContext } from '../../context/LoginProvider'
+
+
 function Login() {
+  const { loginValidation } = useContext(LoginContext); 
+
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   function validateForm() {
-    return email.length > 0 && password.length > 0;
+    loginValidation(email, password);
+
+    //return email.length > 0 && password.length > 0;
   }
 
   function handleSubmit(event) {
