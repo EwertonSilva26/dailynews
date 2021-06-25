@@ -1,4 +1,4 @@
-.create-news-body {
+.edit-news-body {
   padding: 40px;
   height: calc(100vh - 56px);
   display: flex;
@@ -7,7 +7,7 @@
   width: 100%;
 }
 
-.create-news-container {
+.edit-news-container {
   max-width: 1000px;
   width: 100%;
   border: 1px solid grey;
@@ -17,19 +17,19 @@
   flex-direction: column;
 }
 
-.create-news-container h1 {
+.edit-news-container h1 {
   margin: 0;
 }
 
-.create-news-container span {
+.edit-news-container span {
   color: grey;
 }
 
-.create-news-container button {
+.edit-news-container button {
   margin-top: 20px;
 }
 
-.create-news-form {
+.edit-news-form {
   margin-top: 20px;
 }
 

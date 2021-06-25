@@ -20,3 +20,14 @@
 .content span {
   color: grey;
 }
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-left: auto;
+}
+
+.buttons a:first-child {
+  margin-right: 10px;
+}

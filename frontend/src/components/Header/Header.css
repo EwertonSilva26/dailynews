@@ -5,7 +5,7 @@
     border: 1px solid gray !important;
 }
 
-.navbar-dark .navbar-nav .nav-link, .form-control  {
+.navbar-dark a, .navbar-nav  .form-control  {
     color: white !important;
     font-weight: 300 !important;
 }

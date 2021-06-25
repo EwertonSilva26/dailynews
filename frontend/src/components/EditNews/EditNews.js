@@ -1,16 +1,33 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
+import { useContext, useState, useEffect } from "react";
 import { UfsContext } from "../../context/UfsProvider";
-import "./CreateNews.css";
+import "./EditNews.css";
 
-function CreateNews(props) {
+function EditNews() {
+  const [info, setInfo] = useState({});
+
+  const { id } = useParams();
+
   const { ufs } = useContext(UfsContext);
   let [error, setError] = useState("");
+
   let history = useHistory();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3003/news/" + id)
+      .then((response) => {
+        setInfo(response.data[0]);
+      })
+      .catch((err) => {
+        console.log(`Erro: ${"Entrou no erro: " + err.message}`);
+      });
+  });
 
   function validateForm(event) {
     let hasError = 0;
@@ -56,7 +73,7 @@ function CreateNews(props) {
       image: event.target[4].value,
     };
 
-    axios.post("http://localhost:3003/news", object).then((response) => {
+    axios.put("http://localhost:3003/news/" + id, object).then((response) => {
       console.log(response.data);
     });
 
@@ -66,36 +83,45 @@ function CreateNews(props) {
   }
 
   return (
-    <div className="create-news-body">
-      <div className="create-news-container">
+    <div className="edit-news-body">
+      <div className="edit-news-container">
         <Form onSubmit={handleSubmit}>
           <div>
-            <h1>Cadastro de Notícias</h1>
+            <h1>Editar Notícia</h1>
             <span>
               Insira as informações referentes a notícia para continuar
             </span>
           </div>
-          <Form.Group size="lg" controlId="title" className="create-news-form">
+          <Form.Group size="lg" controlId="title" className="edit-news-form">
             <Form.Control
               autoFocus
               type="text"
               placeholder="Insira o título da notícia"
               maxLength="500"
+              defaultValue={info.title}
             />
           </Form.Group>
           <Form.Group
             size="lg"
-            controlId="subtitle"
-            className="create-news-form subtitle"
+            className="edit-news-form subtitle"
             maxLength="1000"
           >
             <Form.Control
               autoFocus
               type="text"
+              id="subtitle"
               placeholder="Insira o subtítulo da notícia"
+              defaultValue={info.subtitle}
             />
-            <Form.Control as="select">
+            <Form.Control as="select" id="select">
               {ufs.map((uf) => {
+                if (uf.uf_id === info.uf_id) {
+                  return (
+                    <option value={uf.uf_id} key={uf.uf_id} defaultValue>
+                      {uf.uf_name}
+                    </option>
+                  );
+                }
                 return (
                   <option value={uf.uf_id} key={uf.uf_id}>
                     {uf.uf_name}
@@ -105,21 +131,27 @@ function CreateNews(props) {
             </Form.Control>
           </Form.Group>
           <Form.Group size="lg" controlId="content">
-            <Form.Control as="textarea" rows="5" placeholder="Descrição" />
+            <Form.Control
+              as="textarea"
+              rows="5"
+              placeholder="Descrição"
+              defaultValue={info.content}
+            />
           </Form.Group>
-          <Form.Group size="lg" controlId="image" className="create-news-form">
+          <Form.Group size="lg" controlId="image" className="edit-news-form">
             <Form.Control
               autoFocus
               type="text"
               placeholder="Insira o url da imagem"
               maxLength="300"
+              defaultValue={info.image}
             />
           </Form.Group>
           {/* <Form.File id="imagem" label="Insira uma imagem" /> */}
           <span className="error-message">{error}</span>
 
           <Button block size="lg" type="submit">
-            Cadastrar Notícia
+            Editar Notícia
           </Button>
         </Form>
       </div>
@@ -127,4 +159,4 @@ function CreateNews(props) {
   );
 }
 
-export default CreateNews;
+export default EditNews;

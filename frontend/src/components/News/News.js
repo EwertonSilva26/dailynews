@@ -1,24 +1,29 @@
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { UfsContext } from '../../context/UfsProvider'
+import React from "react";
+import { Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UfsContext } from "../../context/UfsProvider";
 
-import './News.css';
+import "./News.css";
 
 const News = ({ props }) => {
-    
-  const { ufs } = useContext(UfsContext); 
+  const { ufs } = useContext(UfsContext);
 
   return (
     <Card className="news-card">
-     
-      <Card.Img variant="top" src={props.image} alt=" "/>
+      <Card.Img variant="top" src={props.image} alt=" " />
 
       <Card.Body>
-        <Card.Title>{props.title} | <span>{ufs.map(uf => { if(uf.idUf === props.idUf) return uf.ufName })}</span></Card.Title>
-        <Card.Text>{props.textNew}</Card.Text>
-        <Link to={'/news/' + props.idNew} className="card-link">
+        <Card.Title>
+          {props.title} |{" "}
+          <span>
+            {ufs.map((uf) => {
+              if (uf.uf_id === props.uf_id) return uf.uf_name;
+            })}
+          </span>
+        </Card.Title>
+        <Card.Text>{props.content}</Card.Text>
+        <Link to={"/news/" + props.news_id} className="card-link">
           <Button variant="primary">Ir para notícia</Button>
         </Link>
       </Card.Body>
