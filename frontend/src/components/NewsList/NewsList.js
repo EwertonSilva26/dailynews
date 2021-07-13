@@ -1,3 +1,4 @@
+import React from 'react';
 import News from "../News/News";
 import { useContext } from "react";
 import { NewContext } from "../../context/NewProvider";

@@ -8,10 +8,7 @@ import { NewContext } from "../../context/NewProvider";
 
 import "./Header.css";
 
-// var teste = "";
-const style = {
-  marginRight: "10px",
-};
+const style = { marginRight: "10px"};
 
 function Header() {
   const { ufs } = useContext(UfsContext);
@@ -23,16 +20,13 @@ function Header() {
         <Navbar.Brand href="/news">DailyNews</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/news">Início</Nav.Link>
-          <Form.Control
-            as="select"
-            defaultValue={0}
-            onChange={(event) => {
-              selectUf(event.target.value);
-            }}
-          >
+          <Form.Control as="select" defaultValue={0}
+            onChange={(event) => { selectUf(event.target.value);}} >
+              
             <option disabled value={0} key={0}>
               Filtar por estado
             </option>
+            
             {ufs.map((uf) => {
               return (
                 <option value={uf.uf_id} key={uf.uf_id}>

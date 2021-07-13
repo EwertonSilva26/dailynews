@@ -37,9 +37,8 @@ const NewProvider = (props) => {
     <NewContext.Provider
       value={{
         news: news,
-        selectUf: selectUf,
-      }} /*value={{ livros: livros, insereLivro, deleteLivro, atualizaLivro }} */
-    >
+        selectUf: selectUf
+      }} >
       {props.children}
     </NewContext.Provider>
   );

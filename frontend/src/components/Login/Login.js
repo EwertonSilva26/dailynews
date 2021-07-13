@@ -7,15 +7,14 @@ import { LoginContext } from '../../context/LoginProvider'
 
 
 function Login() {
-  const { loginValidation } = useContext(LoginContext); 
+  // const { loginValidation } = useContext(LoginContext); 
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   function validateForm() {
-    loginValidation(email, password);
+    // loginValidation(email, password);
 
-    //return email.length > 0 && password.length > 0;
   }
 
   function handleSubmit(event) {

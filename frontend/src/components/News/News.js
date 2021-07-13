@@ -18,7 +18,11 @@ const News = ({ props }) => {
           {props.title} |{" "}
           <span>
             {ufs.map((uf) => {
-              if (uf.uf_id === props.uf_id) return uf.uf_name;
+              if (uf.uf_id === props.uf_id) {
+                return uf.uf_name;
+              } else {
+                return "";
+              }
             })}
           </span>
         </Card.Title>

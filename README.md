@@ -18,4 +18,4 @@ Feito isso, precisamos primeiramente subir o nosso backend, para isso, precisamo
 
 Uma vez que os arquivos foram alterados corretamente, para subir o backend é necessário rodar o arquivo *app.js* contido em *./backend* através do comando nodemon app, que subirá o servidor na porta 3003.
 
-Para subir o frontend precisamos executar o comando *npm start* na pasta *./frontend*, que subirá a aplicação na porta 300.
+Para subir o frontend precisamos executar o comando *npm start* na pasta *./frontend*, que subirá a aplicação na porta 3000.

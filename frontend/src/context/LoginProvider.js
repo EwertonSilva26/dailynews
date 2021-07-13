@@ -12,7 +12,7 @@ const LoginProvider = (props) => {
   };
 
   const registerUser = (email, password) => {
-    // setUf(event);
+    console.log(token);
   };
 
   useEffect(() => {
@@ -28,9 +28,9 @@ const LoginProvider = (props) => {
 
   return (
     <LoginContext.Provider
-      value={{
+      value={{ 
         loginValidation: loginValidation,
-        loginValidation: loginValidation,
+        registerUser: registerUser
       }}
     >
       {props.children}
