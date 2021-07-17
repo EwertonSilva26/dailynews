@@ -36,7 +36,17 @@ module.exports = {
     return response;
   },
 
-  loginController: async function (app, req, res) {
+  loginController: async function (app, req, res, errors) {
+
+    if(!errors.isEmpty()) {
+      errors = errors.array();
+      const erros = {
+        message: "Campo email invalido",
+        erros: errors
+      }
+      res.send(erros);
+    }
+
     getUserByEmailModel(req.body.email, connection, function (error, result) {
       if (error) {
         res.send(message);

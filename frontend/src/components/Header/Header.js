@@ -48,7 +48,7 @@ function Header() {
               Filtar por estado
             </option>
 
-            {ufs.map((uf) => {
+            {ufs.map((uf) => { 
               return (
                 <option value={uf.uf_id} key={uf.uf_id}>
                   {uf.uf_name}

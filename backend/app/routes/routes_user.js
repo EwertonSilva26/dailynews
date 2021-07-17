@@ -1,11 +1,16 @@
-const { registerUserController, verifyUserController, loginController, getAllUsersController } = require("../controllers/user_controller");
+const {check, validationResult } = require("express-validator");
+const { registerUserController, loginController, getAllUsersController } = require("../controllers/user_controller");
 
 const { verifyJWT } = require("../../utils");
 
 module.exports = {
   loginUser: function (app, bcrypt, jwt) {
-    app.post("/login", async (req, res) => {
-      loginController(app, req, res);
+    app.post("/login",
+    [check('email').isEmail().withMessage('Campo deve ser prrenchido com email valido.')],
+    async (req, res) => {
+
+      let erros = validationResult(req);
+      loginController(app, req, res, erros);
     });
   },
 

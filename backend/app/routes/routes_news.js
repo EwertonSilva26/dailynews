@@ -1,6 +1,9 @@
+
+const { check, validationResult } = require("express-validator");
 const { getAllNewsController, getNewController, saveNewController, updateNewController, deleteNewController } = require("../controllers/news_controller");
 
 const { verifyJWT } = require("../../utils");
+
 
 module.exports = {
   news: function (app) {
@@ -22,15 +25,34 @@ module.exports = {
   },
 
   saveNew: function (app) {
-    app.post("/news", verifyJWT, (req, res) => {
-      console.log(req.user_id);
-      saveNewController(app, req, res);
-    });
+    app.post("/news", [
+      check('user_id').isNumeric().notEmpty().withMessage("O campo id do usuario é obrigatório."),
+      check('title').isLength({ min: 500 }).notEmpty().withMessage("O campo titulo é obrigatório. Maximo 500 caracteres."),
+      check('subtitle').isLength({ min: 500 }).notEmpty().withMessage("O campo subtitulo é obrigatório. Maximo 500 caracteres."),
+      check('content').notEmpty().withMessage("O campo conteudo é obrigatório."),
+      check('image').isURL().isLength({ min: 500 }).notEmpty().withMessage("O campo image é obrigatório."),
+      check('uf_id').isNumeric().notEmpty().withMessage("O campo id do estado é obrigatório.")
+    
+    ], verifyJWT, (req, res) => {
+
+        let erros = validationResult(req);
+        saveNewController(app, req, res, erros);
+      });
   },
 
   updateNew: function (app) {
-    app.put("/news/:id", verifyJWT, (req, res) => {
-      updateNewController(app, req, res);
+    app.put("/news/:id", [
+      check('user_id').isNumeric().notEmpty().withMessage("O campo id do usuario é obrigatório."),
+      check('title').isLength({ min: 500 }).notEmpty().withMessage("O campo titulo é obrigatório. Maximo 500 caracteres."),
+      check('subtitle').isLength({ min: 500 }).notEmpty().withMessage("O campo subtitulo é obrigatório. Maximo 500 caracteres."),
+      check('content').notEmpty().withMessage("O campo conteudo é obrigatório."),
+      check('image').isURL().isLength({ min: 500 }).notEmpty().withMessage("O campo image é obrigatório."),
+      check('uf_id').isNumeric().notEmpty().withMessage("O campo id do estado é obrigatório.")
+    
+    ], verifyJWT, (req, res) => {
+
+      let erros = validationResult(req);
+      updateNewController(app, req, res, erros);
     });
   },
 
@@ -38,5 +60,9 @@ module.exports = {
     app.delete("/news/:id", verifyJWT, (req, res) => {
       deleteNewController(app, req, res);
     });
-  },
+  }
+
+
+
 };
+

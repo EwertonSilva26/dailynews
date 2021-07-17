@@ -26,9 +26,9 @@ create table news_table (
     news_id int AUTO_INCREMENT,
     user_id int not null,
 	title varchar(500) not null,
-    subtitle varchar(1000),
-    content longtext not null,
-    image varchar(300) not null,
+    subtitle varchar(500),
+    content text not null,
+    image varchar(500) not null,
     created_date timestamp default current_timestamp,
     uf_id int not null,
     
