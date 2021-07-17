@@ -15,12 +15,12 @@ const LoginProvider = (props) => {
       token: token.token,
     };
 
-    localStorage.setItem("token", JSON.stringify(data));
+    sessionStorage.setItem("token", JSON.stringify(data));
     setToken(token);
   };
 
   function getAuthUser() {
-    const auth = localStorage.getItem("token");
+    const auth = sessionStorage.getItem("token");
     if (!auth) {
       return;
     }

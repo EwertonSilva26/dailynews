@@ -23,7 +23,7 @@ function Header() {
 
   function handleButton() {
     if (token) {
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
     }
 
     setTimeout(() => {
