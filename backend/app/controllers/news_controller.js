@@ -24,16 +24,6 @@ module.exports = {
   },
 
   saveNewController: function (app, req, res, errors) {
-
-    if(!errors.isEmpty()) {
-      errors = errors.array();
-      const erros = {
-        message: "Há campos invalidos",
-        erros: errors
-      }
-      res.send(erros);
-    }
-
     saveNewModel(req.body, connection, function (error, result) {
       if (error) {
         res.send(message);
@@ -52,16 +42,6 @@ module.exports = {
   },
 
   updateNewController: function (app, req, res, errors) {
-    
-    if(!errors.isEmpty()) {
-      errors = errors.array();
-      const erros = {
-        message: "Há campos invalidos",
-        erros: errors
-      }
-      res.send(erros);
-    }
-
     updateNewModel(req.params.id, req.body, connection, function (error, result) {
       if (error) {
         res.send(message);
