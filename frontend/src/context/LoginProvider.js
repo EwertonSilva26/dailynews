@@ -4,23 +4,34 @@ import axios from "axios";
 export const LoginContext = React.createContext();
 
 const LoginProvider = (props) => {
-  const [token, setToken] = useState("");
-  // const [uf, setUf] = useState(0);
+  const [token, setToken] = useState(getAuthUser());
 
-  const loginValidation = (email, password) => {
-    // setUf(event);
+  const authUser = (token) => {
+    let data = {
+      auth: token.auth,
+      user_id: token.user_id,
+      user_name: token.user_name,
+      email: token.email,
+      token: token.token,
+    };
+
+    localStorage.setItem("token", JSON.stringify(data));
+    setToken(token);
   };
 
-  const registerUser = (email, password) => {
-    console.log(token);
-  };
+  function getAuthUser() {
+    const auth = localStorage.getItem("token");
+    if (!auth) {
+      return;
+    }
+
+    return JSON.parse(auth);
+  }
 
   useEffect(() => {
     axios
       .get("http://localhost:3003/news")
-      .then((response) => {
-        setToken(response.data);
-      })
+      .then((response) => {})
       .catch((err) => {
         console.log(`Erro: ${err}`);
       });
@@ -28,9 +39,9 @@ const LoginProvider = (props) => {
 
   return (
     <LoginContext.Provider
-      value={{ 
-        loginValidation: loginValidation,
-        registerUser: registerUser
+      value={{
+        token: token,
+        authUser: authUser,
       }}
     >
       {props.children}

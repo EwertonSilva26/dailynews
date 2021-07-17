@@ -1,14 +1,8 @@
-const {
-  getAllNewsController,
-  getNewController,
-  saveNewController,
-  updateNewController,
-  deleteNewController
-} = require("../controllers/news_controller");
+const { getAllNewsController, getNewController, saveNewController, updateNewController, deleteNewController } = require("../controllers/news_controller");
 
+const { verifyJWT } = require("../../utils");
 
 module.exports = {
-
   news: function (app) {
     app.get("/", (req, res) => {
       getAllNewsController(app, req, res);
@@ -28,21 +22,21 @@ module.exports = {
   },
 
   saveNew: function (app) {
-    app.post("/news", (req, res) => {
+    app.post("/news", verifyJWT, (req, res) => {
+      console.log(req.user_id);
       saveNewController(app, req, res);
     });
   },
 
   updateNew: function (app) {
-    app.put("/news/:id", (req, res) => {
+    app.put("/news/:id", verifyJWT, (req, res) => {
       updateNewController(app, req, res);
     });
   },
 
   deleteNew: function (app) {
-    app.delete("/news/:id", (req, res) => {
+    app.delete("/news/:id", verifyJWT, (req, res) => {
       deleteNewController(app, req, res);
     });
-  }
-  
-}
+  },
+};

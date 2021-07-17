@@ -4,15 +4,15 @@ import { NavLink } from "react-router-dom";
 
 import axios from "axios";
 
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import React from "react";
 
-// import { UfsContext } from '../../context/UfsProvider'
-//import { UsersContext } from '../../context/UsersProvider'
+import { LoginContext } from "../../context/LoginProvider";
 
 import "./NewDetails.css";
 
 function NewDetails() {
+  const { token } = useContext(LoginContext);
   const [info, setInfo] = useState({});
 
   const { id } = useParams();
@@ -24,18 +24,22 @@ function NewDetails() {
         setInfo(response.data[0]);
       })
       .catch((err) => {
-        console.log(`Erro: ${"Entrou no erro: " + err.message}`);
+        console.log(`Erro: ${err.message}`);
       });
   });
 
   function deleteNews() {
     axios
-      .delete("http://localhost:3003/news/" + id)
+      .delete("http://localhost:3003/news/" + id, {
+        headers: {
+          Authorization: token.token,
+        },
+      })
       .then((response) => {
         console.log(response);
       })
       .catch((err) => {
-        console.log(`Erro: ${"Entrou no erro: " + err.message}`);
+        console.log(`Erro: ${err.message}`);
       });
   }
 
@@ -46,31 +50,30 @@ function NewDetails() {
         <span>{info.uf_name}</span>
         <span>Autor: {info.user_name}</span>
         <span>Publicado em: {info.created_date}</span>
-        <img
-          src={info.image}
-          alt={`Imagem referente a seguinte noticia ${info.title}`}
-        ></img>
+        <img src={info.image} alt={`Imagem referente a seguinte noticia ${info.title}`}></img>
         <p>{info.content}</p>
-        <div className="buttons">
-          <NavLink to={"/news/" + id + "/edit"} exact>
-            <Button block size="lg" id="editar">
-              Editar
-            </Button>
-          </NavLink>
+        {token && info.user_id === token.user_id && (
+          <div className="buttons">
+            <NavLink to={"/news/" + id + "/edit"} exact>
+              <Button block size="lg" id="editar">
+                Editar
+              </Button>
+            </NavLink>
 
-          <NavLink to="/news" exact>
-            <Button
-              size="lg"
-              id="excluir"
-              variant="danger"
-              onClick={() => {
-                deleteNews();
-              }}
-            >
-              Excluir
-            </Button>
-          </NavLink>
-        </div>
+            <NavLink to="/news" exact>
+              <Button
+                size="lg"
+                id="excluir"
+                variant="danger"
+                onClick={() => {
+                  deleteNews();
+                }}
+              >
+                Excluir
+              </Button>
+            </NavLink>
+          </div>
+        )}
       </div>
     </div>
   );

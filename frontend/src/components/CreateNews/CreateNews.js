@@ -5,9 +5,12 @@ import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { UfsContext } from "../../context/UfsProvider";
+import { LoginContext } from "../../context/LoginProvider";
+
 import "./CreateNews.css";
 
 function CreateNews(props) {
+  const { token } = useContext(LoginContext);
   const { ufs } = useContext(UfsContext);
   let [error, setError] = useState("");
   let history = useHistory();
@@ -48,7 +51,7 @@ function CreateNews(props) {
     }
 
     const object = {
-      user_id: 1,
+      user_id: token.user_id,
       title: event.target[0].value,
       subtitle: event.target[1].value,
       uf_id: event.target[2].value,
@@ -56,9 +59,15 @@ function CreateNews(props) {
       image: event.target[4].value,
     };
 
-    axios.post("http://localhost:3003/news", object).then((response) => {
-      console.log(response.data);
-    });
+    axios
+      .post("http://localhost:3003/news", object, {
+        headers: {
+          Authorization: token.token,
+        },
+      })
+      .then((response) => {
+        //console.log(response.data);
+      });
 
     setTimeout(() => {
       history.push("/news");
@@ -71,29 +80,13 @@ function CreateNews(props) {
         <Form onSubmit={handleSubmit}>
           <div>
             <h1>Cadastro de Notícias</h1>
-            <span>
-              Insira as informações referentes a notícia para continuar
-            </span>
+            <span>Insira as informações referentes a notícia para continuar</span>
           </div>
           <Form.Group size="lg" controlId="title" className="create-news-form">
-            <Form.Control
-              autoFocus
-              type="text"
-              placeholder="Insira o título da notícia"
-              maxLength="500"
-            />
+            <Form.Control autoFocus type="text" placeholder="Insira o título da notícia" maxLength="500" />
           </Form.Group>
-          <Form.Group
-            size="lg"
-            controlId="subtitle"
-            className="create-news-form subtitle"
-            maxLength="1000"
-          >
-            <Form.Control
-              autoFocus
-              type="text"
-              placeholder="Insira o subtítulo da notícia"
-            />
+          <Form.Group size="lg" controlId="subtitle" className="create-news-form subtitle" maxLength="1000">
+            <Form.Control autoFocus type="text" placeholder="Insira o subtítulo da notícia" />
             <Form.Control as="select">
               {ufs.map((uf) => {
                 return (
@@ -108,12 +101,7 @@ function CreateNews(props) {
             <Form.Control as="textarea" rows="5" placeholder="Descrição" />
           </Form.Group>
           <Form.Group size="lg" controlId="image" className="create-news-form">
-            <Form.Control
-              autoFocus
-              type="text"
-              placeholder="Insira o url da imagem"
-              maxLength="300"
-            />
+            <Form.Control autoFocus type="text" placeholder="Insira o url da imagem" maxLength="300" />
           </Form.Group>
           {/* <Form.File id="imagem" label="Insira uma imagem" /> */}
           <span className="error-message">{error}</span>

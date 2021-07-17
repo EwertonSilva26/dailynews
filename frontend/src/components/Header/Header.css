@@ -10,3 +10,12 @@
     font-weight: 300 !important;
 }
 
+.user-info {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0;
+    color: white;
+    font-size: 12px;
+    background-color: #343a40b5;
+}
+

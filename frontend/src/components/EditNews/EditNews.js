@@ -6,9 +6,12 @@ import { useHistory } from "react-router-dom";
 
 import { useContext, useState, useEffect } from "react";
 import { UfsContext } from "../../context/UfsProvider";
+import { LoginContext } from "../../context/LoginProvider";
+
 import "./EditNews.css";
 
 function EditNews() {
+  const { token } = useContext(LoginContext);
   const [info, setInfo] = useState({});
 
   const { id } = useParams();
@@ -25,7 +28,7 @@ function EditNews() {
         setInfo(response.data[0]);
       })
       .catch((err) => {
-        console.log(`Erro: ${"Entrou no erro: " + err.message}`);
+        console.log(`Erro: ${err.message}`);
       });
   });
 
@@ -73,9 +76,15 @@ function EditNews() {
       image: event.target[4].value,
     };
 
-    axios.put("http://localhost:3003/news/" + id, object).then((response) => {
-      console.log(response.data);
-    });
+    axios
+      .put("http://localhost:3003/news/" + id, object, {
+        headers: {
+          Authorization: token.token,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
 
     setTimeout(() => {
       history.push("/news");
@@ -88,31 +97,13 @@ function EditNews() {
         <Form onSubmit={handleSubmit}>
           <div>
             <h1>Editar Notícia</h1>
-            <span>
-              Insira as informações referentes a notícia para continuar
-            </span>
+            <span>Insira as informações referentes a notícia para continuar</span>
           </div>
           <Form.Group size="lg" controlId="title" className="edit-news-form">
-            <Form.Control
-              autoFocus
-              type="text"
-              placeholder="Insira o título da notícia"
-              maxLength="500"
-              defaultValue={info.title}
-            />
+            <Form.Control autoFocus type="text" placeholder="Insira o título da notícia" maxLength="500" defaultValue={info.title} />
           </Form.Group>
-          <Form.Group
-            size="lg"
-            className="edit-news-form subtitle"
-            maxLength="1000"
-          >
-            <Form.Control
-              autoFocus
-              type="text"
-              id="subtitle"
-              placeholder="Insira o subtítulo da notícia"
-              defaultValue={info.subtitle}
-            />
+          <Form.Group size="lg" className="edit-news-form subtitle" maxLength="1000">
+            <Form.Control autoFocus type="text" id="subtitle" placeholder="Insira o subtítulo da notícia" defaultValue={info.subtitle} />
             <Form.Control as="select" id="select">
               {ufs.map((uf) => {
                 if (uf.uf_id === info.uf_id) {
@@ -131,21 +122,10 @@ function EditNews() {
             </Form.Control>
           </Form.Group>
           <Form.Group size="lg" controlId="content">
-            <Form.Control
-              as="textarea"
-              rows="5"
-              placeholder="Descrição"
-              defaultValue={info.content}
-            />
+            <Form.Control as="textarea" rows="5" placeholder="Descrição" defaultValue={info.content} />
           </Form.Group>
           <Form.Group size="lg" controlId="image" className="edit-news-form">
-            <Form.Control
-              autoFocus
-              type="text"
-              placeholder="Insira o url da imagem"
-              maxLength="300"
-              defaultValue={info.image}
-            />
+            <Form.Control autoFocus type="text" placeholder="Insira o url da imagem" maxLength="300" defaultValue={info.image} />
           </Form.Group>
           {/* <Form.File id="imagem" label="Insira uma imagem" /> */}
           <span className="error-message">{error}</span>

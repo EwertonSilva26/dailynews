@@ -119,10 +119,10 @@ insert into uf_table (uf_name, initials)
 values('Tocantins','TO');
 
 insert into user_table (user_name, email, user_password, uf_id)
-values('Gabriel Willian','gabriel.willian@aluno.ifsp.edu.br', 'teste', 23);
+values('Gabriel Willian','gabriel.willian@aluno.ifsp.edu.br', '$2b$10$sevno2hoxYqWUgN7dXCOmeA1oHQfJoyGGbFj8eh955nvWSMoq2QQO', 23);
 
 insert into user_table (user_name, email, user_password, uf_id)
-values('Ewerton Soares','ewertonsoaressilva@aluno.ifsp.edu.br', 'teste', 25);
+values('Ewerton Soares','ewertonsoaressilva@aluno.ifsp.edu.br', '$2b$10$sevno2hoxYqWUgN7dXCOmeA1oHQfJoyGGbFj8eh955nvWSMoq2QQO', 25);
 
 insert into news_table (user_id, content, title, subtitle, uf_id, image) 
 values (1,

@@ -1,15 +1,8 @@
-const {
-  getNewsModel,
-  getNewModel,
-  saveNewModel,
-  updateNewModel,
-  deleteNewModel,
-} = require("../models/news_model");
+const { getNewsModel, getNewModel, saveNewModel, updateNewModel, deleteNewModel } = require("../models/news_model");
 
-const { connection, message } = require('../../utils');
+const { connection, message } = require("../../utils");
 
 module.exports = {
-
   getAllNewsController: function (app, req, res) {
     getNewsModel(connection, function (error, result) {
       if (error) {
@@ -49,25 +42,20 @@ module.exports = {
   },
 
   updateNewController: function (app, req, res) {
-    updateNewModel(
-      req.params.id,
-      req.body,
-      connection,
-      function (error, result) {
-        if (error) {
-          res.send(message);
-        } else {
-          const updatedNew = {
-            news_id: req.params.id,
-            content: req.body.content,
-            title: req.body.title,
-            subtitle: req.body.subtitle,
-            image: req.body.image,
-          };
-          res.send(updatedNew);
-        }
+    updateNewModel(req.params.id, req.body, connection, function (error, result) {
+      if (error) {
+        res.send(message);
+      } else {
+        const updatedNew = {
+          news_id: req.params.id,
+          content: req.body.content,
+          title: req.body.title,
+          subtitle: req.body.subtitle,
+          image: req.body.image,
+        };
+        res.send(updatedNew);
       }
-    );
+    });
   },
 
   deleteNewController: function (app, req, res) {
@@ -78,6 +66,5 @@ module.exports = {
         res.send(result);
       }
     });
-  }
-
-}
+  },
+};

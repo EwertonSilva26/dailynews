@@ -1,11 +1,8 @@
-const app = require('./config/server');
+const app = require("./config/server");
 
-const routesNews = require('./app/routes/routes_news');
-const routesUser = require('./app/routes/routes_user');
-const routesUf = require('./app/routes/routes_uf');
-
-const bCrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const routesNews = require("./app/routes/routes_news");
+const routesUser = require("./app/routes/routes_user");
+const routesUf = require("./app/routes/routes_uf");
 
 // Rotas para noticias
 routesNews.news(app);
@@ -20,6 +17,6 @@ routesUf.ufs(app);
 routesUf.newsByUf(app);
 
 //Rotas para usuario
-routesUser.loginUser(app, bCrypt, jwt);
-routesUser.registerUser(app, bCrypt);
+routesUser.loginUser(app);
+routesUser.registerUser(app);
 routesUser.users(app);
