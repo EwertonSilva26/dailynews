@@ -37,13 +37,12 @@ module.exports = {
   },
 
   loginController: async function (app, req, res, errors) {
-
-    if(!errors.isEmpty()) {
+    if (!errors.isEmpty()) {
       errors = errors.array();
       const erros = {
         message: "Campo email invalido",
-        erros: errors
-      }
+        erros: errors,
+      };
       res.send(erros);
     }
 
@@ -73,7 +72,7 @@ module.exports = {
                 token: token,
               });
             } else {
-              res.status(401).send({ message: "Falha na autenticação!" });
+              res.status(401).send({ message: "Senha inválida!" });
             }
           });
         } else {

@@ -12,6 +12,7 @@ function Login() {
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  let [error, setError] = React.useState("");
 
   let history = useHistory();
 
@@ -23,15 +24,23 @@ function Login() {
       password: event.target[1].value,
     };
 
-    axios.post("http://localhost:3003/login", object).then((response) => {
-      if (response.status === 200) {
-        authUser(response.data);
+    axios
+      .post("http://localhost:3003/login", object)
+      .then((response) => {
+        if (response.status === 200) {
+          authUser(response.data);
+          setError("");
 
-        setTimeout(() => {
-          history.push("/news");
-        }, 200);
-      }
-    });
+          setTimeout(() => {
+            history.push("/news");
+          }, 200);
+        } else {
+          console.log("erro");
+        }
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+      });
   }
 
   return (
@@ -46,6 +55,7 @@ function Login() {
         </Form.Group>
         <Form.Group size="lg" controlId="password">
           <Form.Control type="password" value={password} placeholder="Senha" onChange={(e) => setPassword(e.target.value)} />
+          <span className="error-message">{error}</span>
         </Form.Group>
 
         <Button block size="lg" type="submit">
